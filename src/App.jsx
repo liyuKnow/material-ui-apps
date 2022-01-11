@@ -19,6 +19,7 @@ function App() {
       <Navbar />
       <Container className={classes.container} >
         <Search />
+        <br />
         <ImageResults />
       </Container>
     </div>

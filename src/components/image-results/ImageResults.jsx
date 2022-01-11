@@ -22,10 +22,10 @@ const ImageResults = () => {
     const searchText = useSelector(state => state.search.searchText);
     const amount = useSelector(state => state.search.amount);
     // const images = useSelector(state => state.search.images);
-
+    // console.log(amount)
     const dispatch = useDispatch();
 
-    const fetchUrl = `https://pixabay.com/api/?key=${process.env.REACT_APP_PIXABAY_API_KEY}&q=${searchText}&image_type=photo&pretty=true`;
+    const fetchUrl = `https://pixabay.com/api/?key=${process.env.REACT_APP_PIXABAY_API_KEY}&q=${searchText}&image_type=photo&per_page=${amount}`;
 
     useEffect(() => {
         // axios async await
@@ -39,13 +39,13 @@ const ImageResults = () => {
                 }).catch(err => console.log(err));
         }
         fetchData();
-    }, [searchText]);
+    }, [searchText, amount]);
     return (
         <div>
             {!isLoading && images.length === 0 && <h1 className="text-5xl text-center mx-auto mt-32">No Images Found</h1>}
 
             {isLoading ? <h1 className="text-6xl text-center mx-auto mt-32">Loading...</h1> :
-                <Grid className={classes.grid_container} container spacing={2}>
+                <Grid style={{ marginTop: 20 }} container spacing={2}>
                     <Grid item xs={12}>
                         <Grid container justifyContent="center" spacing={4}>
                             {images.map(image => (
